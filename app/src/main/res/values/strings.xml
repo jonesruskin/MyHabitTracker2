@@ -6,4 +6,5 @@
     <string name="data">Enter the required habit</string>
     <string name="button1">Read</string>
     <string name="text">database will be listed here</string>
+    <string name="button2">Delete entries</string>
 </resources>

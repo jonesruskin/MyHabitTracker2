@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="40sp"
+        android:textSize="30sp"
         android:hint="@string/habit"
         android:inputType="textMultiLine" />
 
@@ -25,7 +25,7 @@
             android:id="@+id/edit2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-        android:textSize="40sp"
+        android:textSize="30sp"
             android:hint="@string/duration"
             android:inputType="number"
         android:textColor="@color/colorPrimary" />
@@ -34,7 +34,7 @@
             android:id="@+id/next_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="40sp"
+            android:textSize="30sp"
             android:text="@string/button"
         android:textColor="?attr/editTextColor"
         android:background="@android:color/holo_blue_dark" />
@@ -42,7 +42,7 @@
         android:id="@+id/edit3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="40sp"
+        android:textSize="30sp"
         android:hint="@string/data"
         android:inputType="textMultiLine"
         android:textColor="@color/colorPrimary" />
@@ -51,7 +51,7 @@
         android:id="@+id/req_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="40sp"
+        android:textSize="30sp"
         android:text="@string/button1"
         android:textColor="?attr/editTextColor"
         android:background="@android:color/holo_blue_dark" />
@@ -60,8 +60,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/text"
-        android:textSize="40sp"
+        android:textSize="30sp"
         android:textColor="#4689C8"
         android:textStyle="bold"
         />
+
+    <Button
+        android:id="@+id/del_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:text="@string/button2"
+        android:textColor="?attr/editTextColor"
+        android:background="@android:color/holo_blue_dark" />
 </LinearLayout>

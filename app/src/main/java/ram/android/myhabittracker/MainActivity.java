@@ -15,7 +15,6 @@ import android.widget.Toast;
 import ram.android.myhabittracker.data.HabitContract;
 import ram.android.myhabittracker.data.HabitTrackerDBHelper;
 
-import static ram.android.myhabittracker.R.string.duration;
 import static ram.android.myhabittracker.data.HabitContract.HabitEntry.COLUMN_DURATION;
 import static ram.android.myhabittracker.data.HabitContract.HabitEntry.COLUMN_HABIT_NAME;
 
@@ -46,13 +45,19 @@ public class MainActivity extends AppCompatActivity {
         Button read_button = (Button) findViewById(R.id.req_button);
         read_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                EditText samplePersonEditTextView = (EditText) findViewById(R.id.edit1);
+                EditText samplePersonEditTextView = (EditText) findViewById(R.id.edit3);
                 String inputHabitName = samplePersonEditTextView.getText().toString();
                 readHabits(inputHabitName);
             }
         });
+        Button delete_button = (Button) findViewById(R.id.del_button);
+        delete_button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                deleteEntries();
+            }
 
 
+        });
     }
 
     //Insert method for making an entry to the habit tracker database
@@ -65,6 +70,9 @@ public class MainActivity extends AppCompatActivity {
         db.insert(HabitContract.HabitEntry.TABLE_NAME, "null", values);
         Toast.makeText(MainActivity.this, "Record Inserted Successfully!",
                 Toast.LENGTH_LONG).show();
+        Button readButton = (Button) findViewById(R.id.req_button);
+        readButton.setVisibility(View.VISIBLE);
+
     }
 
     //read method that reads habit_name and duration of entries with habit name as gaming
@@ -102,5 +110,13 @@ public class MainActivity extends AppCompatActivity {
     //deletes all the entries from the table
     public void deleteEntries() {
         db.delete(HabitContract.HabitEntry.TABLE_NAME, null, null);
+        Toast.makeText(MainActivity.this, "Record Deleted Successfully!",
+                Toast.LENGTH_LONG).show();
+        TextView textview = (TextView) findViewById(R.id.text_view1);
+        textview.setText("");
+        Button readButton = (Button) findViewById(R.id.req_button);
+        readButton.setVisibility(View.INVISIBLE);
     }
 }
+
+
