@@ -6,10 +6,16 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import ram.android.myhabittracker.data.HabitContract;
 import ram.android.myhabittracker.data.HabitTrackerDBHelper;
 
+import static ram.android.myhabittracker.R.string.duration;
 import static ram.android.myhabittracker.data.HabitContract.HabitEntry.COLUMN_DURATION;
 import static ram.android.myhabittracker.data.HabitContract.HabitEntry.COLUMN_HABIT_NAME;
 
@@ -17,20 +23,36 @@ public class MainActivity extends AppCompatActivity {
 
     HabitTrackerDBHelper dbHelper;
     SQLiteDatabase db;
+    int i = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         dbHelper = new HabitTrackerDBHelper(this);
-        insertHabit("Gardening", 120);
-        insertHabit("Gaming", 200);
-        insertHabit("Yoga", 60);
-        insertHabit("Gaming", 45);
-        readHabits("Gaming");
-        deleteEntries();
-        insertHabit("Cycling", 45);
-        insertHabit("Walking", 60);
+        Button next_button = (Button) findViewById(R.id.next_button);
+        next_button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                EditText samplePersonEditTextView = (EditText) findViewById(R.id.edit1);
+                String inputHabitName = samplePersonEditTextView.getText().toString();
+                EditText sampleNumberSignedEditText = (EditText) findViewById(R.id.edit2);
+                String value = sampleNumberSignedEditText.getText().toString();
+                i = Integer.parseInt(value);
+                insertHabit(inputHabitName, i);
+                samplePersonEditTextView.setText("");
+                sampleNumberSignedEditText.setText("");
+            }
+        });
+        Button read_button = (Button) findViewById(R.id.req_button);
+        read_button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                EditText samplePersonEditTextView = (EditText) findViewById(R.id.edit1);
+                String inputHabitName = samplePersonEditTextView.getText().toString();
+                readHabits(inputHabitName);
+            }
+        });
+
+
     }
 
     //Insert method for making an entry to the habit tracker database
@@ -41,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
         values.put(COLUMN_DURATION, duration);
 
         db.insert(HabitContract.HabitEntry.TABLE_NAME, "null", values);
+        Toast.makeText(MainActivity.this, "Record Inserted Successfully!",
+                Toast.LENGTH_LONG).show();
     }
 
     //read method that reads habit_name and duration of entries with habit name as gaming
@@ -69,6 +93,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             } while (c.moveToNext());
             Log.v("Result of query ", result);
+            TextView textview = (TextView) findViewById(R.id.text_view1);
+            textview.setText(result);
         }
         c.close();
     }
